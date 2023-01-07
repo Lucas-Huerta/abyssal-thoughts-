@@ -1,16 +1,18 @@
-<script setup>
+<script>
+import HomeArticle from "./views/HomeArticle.vue"
+import { RouterView } from "vue-router"
 
-fetch('../data/data.json')
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-
+export default{
+  components:{
+    HomeArticle
+  }
+}
 </script>
 
 <template>
   <div>
     <h1 class="mainTitle">Abyssal thought</h1>
+    <HomeArticle />
+    <RouterView />
   </div>
 </template>
-
-<style scoped>
-</style>
