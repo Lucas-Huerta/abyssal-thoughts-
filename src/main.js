@@ -11,5 +11,3 @@ app.use(router);
 
 app.use(pinia);
 app.mount('#app');
-
-// createApp(App).use(router).mount('#app')

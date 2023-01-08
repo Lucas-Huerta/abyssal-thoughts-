@@ -1,21 +1,21 @@
 <script>
+import { ref } from 'vue';
+import { useArticleStore } from '../store/store'
 
 export default{
-
+    props: {
+        article: null
+    }, 
     data(){
         return{
-            tabArticles: null
+            tabArticles: ref(), 
+            store: ref()
         }
     },
 
-    props: {
-        // props to load one article
-        Article: null
-    },
-
     // fetch data at the component is mounted
-    async mounted(){
-        await this.fetchData()
+    mounted(){
+        this.fetchData()
     },
 
     methods: {
@@ -23,20 +23,22 @@ export default{
          * Fetch datas in data.json (in public/data)
          */
         async fetchData(){
-            const res = await fetch('../data/data.json'); 
-            this.tabArticles = await res.json();
-            console.log("data in home: ", this.tabArticles); 
+            // use the store
+            this.store = await useArticleStore();
+
+            // call function in store witch fetch data 
+            await this.store.listArticles()
+                .catch((err) => {console.error(err)});
+            this.tabArticles = this.store.articles; 
         }, 
 
-        // push to one Article with the data of the one article
-        async goOneArticle(idArticle){
+        // push to one Article with the index(title) of the one article
+        async goOneArticle(index){
             await this.$router.push({
                 name: "article", 
-                params: {
-                    idArticle: idArticle
-                },
-                query: {idArticle: idArticle},
-                state: {idArticle}})
+                params: {index},
+                state: {Article: index}
+            })
         }
     }
 }
@@ -52,8 +54,8 @@ export default{
 
     <!-- v-for with article  -->
     <div class="columArticle">
-        <div v-for="article in this.tabArticles" :key="article">
-            <div class="rowArticle" @click="goOneArticle(article.Articles)">
+        <div v-for="(article, index) in this.tabArticles" :key="article">
+            <div class="rowArticle" @click="goOneArticle(index)">
                 <img :src="article.img" alt="image article"/>
                 <h2>
                     {{ article.title }}

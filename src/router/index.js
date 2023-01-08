@@ -7,11 +7,10 @@ const routes = [
     component: () => import("../views/Home.vue")
   },
   {
-    path: "/article",
+    path: `/article-:index(\\d+)*`,
     name: "article",
-    meta: { requireVisitor: true },
-    params: true, 
-    query: true, 
+    props:true, 
+    params: true,
     component: () => import("../views/OneArticle.vue")
   },
 ];
