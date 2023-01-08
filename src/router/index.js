@@ -9,9 +9,14 @@ const routes = [
   {
     path: `/article-:index(\\d+)*`,
     name: "article",
-    props:true, 
     params: true,
     component: () => import("../views/OneArticle.vue")
+  },
+  {
+    path: `/:index(\\d+)*`,
+    name: "OneArticle",
+    params: true,
+    component: () => import("../views/TextOneArticle.vue")
   },
 ];
 
