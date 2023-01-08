@@ -1,30 +1,44 @@
 <script>
+
 export default{
-  data(){
-    return{
-      tabArticles: null
+
+    data(){
+        return{
+            tabArticles: null
+        }
+    },
+
+    props: {
+        // props to load one article
+        Article: null
+    },
+
+    // fetch data at the component is mounted
+    async mounted(){
+        await this.fetchData()
+    },
+
+    methods: {
+        /**
+         * Fetch datas in data.json (in public/data)
+         */
+        async fetchData(){
+            const res = await fetch('../data/data.json'); 
+            this.tabArticles = await res.json();
+            console.log("data in home: ", this.tabArticles); 
+        }, 
+
+        // push to one Article with the data of the one article
+        async goOneArticle(idArticle){
+            await this.$router.push({
+                name: "article", 
+                params: {
+                    idArticle: idArticle
+                },
+                query: {idArticle: idArticle},
+                state: {idArticle}})
+        }
     }
-  },
-
-  props: {
-    // props to load one article
-    Article: null
-  },
-
-  mounted(){
-    this.fetchData()
-  },
-
-  methods: {
-    /**
-     * Fetch datas in data.json (in public/data)
-     */
-    async fetchData(){
-      const res = await fetch('../data/data.json')
-      this.tabArticles = await res.json();
-      console.log("data", this.tabArticles); 
-    }, 
-  }
 }
 </script>
 
@@ -38,11 +52,13 @@ export default{
 
     <!-- v-for with article  -->
     <div class="columArticle">
-        <div class="rowArticle" v-for="(article, index) in tabArticles" :key="index">
-            <img :src="article.img" alt="image article"/>
-            <h2>
-                {{ article.title }}
-            </h2>
+        <div v-for="article in this.tabArticles" :key="article">
+            <div class="rowArticle" @click="goOneArticle(article.Articles)">
+                <img :src="article.img" alt="image article"/>
+                <h2>
+                    {{ article.title }}
+                </h2>
+            </div>
         </div>
     </div>
     
@@ -54,7 +70,6 @@ export default{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
 }
 
 .rowArticle{

@@ -24,7 +24,24 @@
     "OFFF":  {
         "id": "1", 
         "title": "offf!",
-        "img": "../offf.png"
+        "img": "../offf.png", 
+        "Articles": [
+            {
+                "id": "0", 
+                "title": "this is not a nft",
+                "img": "../art.png"
+            }, 
+            {
+                "id": "1", 
+                "title": "buy this and do nothing",
+                "img": "../art.png"
+            }, 
+            {
+                "id": "2", 
+                "title": "don't trust our system",
+                "img": "../art.png"
+            }
+        ]
     }, 
     "History":  {
         "id": "2", 
