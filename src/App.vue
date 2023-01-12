@@ -23,9 +23,6 @@ export default{
 
 <template>
   <div>
-    <RouterLink to="/">
-      <h1 class="mainTitle">Abyssal thought</h1>
-    </RouterLink>
     <RouterView />
   </div>
 </template>

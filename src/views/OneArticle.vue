@@ -21,15 +21,16 @@ export default{
         for (const index in this.store) {
             if (index === this.route.params.index) {
                 this.pageArticle = this.store[index].Articles;
-            }  
+            }
         }
     },
 
     methods: {
-        async goArticle(index){
+        async goArticle(index, title, img, text){
+            // TODO pass good parameter to component textOneArticle
             await this.$router.push({
                 name: "OneArticle", 
-                params: {index},
+                params: {index, title, img, text},
                 state: {Article: index}
             })
         }
@@ -45,13 +46,18 @@ export default{
             <circle cx="111" cy="111" r="110.75" stroke="white" stroke-width="0.5"/>
         </svg>
     </div>
+
+    <RouterLink to="/">
+      <h1 class="mainTitle">Abyssal thought</h1>
+    </RouterLink>
+    
     <div v-if="this.pageArticle" id="titleArticle">
         <h2>
             {{ this.route.params.index }}
         </h2>
     </div>
     <div class="columnArticle">
-        <div v-for="article in this.pageArticle" :key="article" class="row" @click="goArticle(article.title)">
+        <div v-for="article in this.pageArticle" :key="article" class="row" @click="goArticle(article.id, article.title, article.img, article.text)">
             <h2>
                 {{ article.title }}
             </h2>

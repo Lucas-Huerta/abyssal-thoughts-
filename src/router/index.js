@@ -13,9 +13,9 @@ const routes = [
     component: () => import("../views/OneArticle.vue")
   },
   {
-    path: `/:index(\\d+)*`,
+    path: `/:index:title(\\d+)*:img:text`,
     name: "OneArticle",
-    params: true,
+    params: true, 
     component: () => import("../views/TextOneArticle.vue")
   },
 ];

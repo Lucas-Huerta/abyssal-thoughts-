@@ -1,5 +1,5 @@
 <script>
-import { ref } from 'vue';
+import { createApp, ref } from 'vue';
 import { useArticleStore } from '../store/store'
 
 export default{
@@ -18,6 +18,7 @@ export default{
         this.fetchData()
     },
 
+    // TODO: fetch datas dans app.vue (reload toujours les datas)
     methods: {
         /**
          * Fetch datas in data.json (in public/data)
@@ -51,6 +52,10 @@ export default{
             <circle cx="111" cy="111" r="110.75" stroke="white" stroke-width="0.5"/>
         </svg>
     </div>
+
+    <RouterLink to="/">
+      <h1 class="mainTitle">Abyssal thought</h1>
+    </RouterLink>
 
     <!-- v-for with article  -->
     <div class="columArticle">
