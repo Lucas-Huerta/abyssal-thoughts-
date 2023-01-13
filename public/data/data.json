@@ -2,74 +2,81 @@
     "Art": {
         "id": "0", 
         "title": "art",
-        "img": "../art.png",
+        "img": "../img/art/thisisnotnft.png",
         "Articles": [
             {
                 "id": "0", 
                 "title": "'this is not a nft'",
-                "img": "../art.png", 
-                "text": "'This is not a nft' is the symbol of my collection. That’s why it’s named like it. I do not stand with values shared with nfts and cryptocurrency. That’s my vision and i completely get it if you do. I think creating a new system built bearly teh same as the old one creates the same problems."
+                "img": "../img/art/thisisnotnft.png", 
+                "text": "'This is not a nft' is the symbol of my collection. That’s why it’s named like it. I do not stand with values shared with nfts and cryptocurrency. That’s my vision and i completely get it if you do. I think creating a new system built bearly the same as the old one creates the same problems."
             }, 
             {
                 "id": "1", 
                 "title": "'buy this and do nothing'",
-                "img": "../art.png", 
-                "text": "'This is not a nft' is the symbol of my collection. That’s why it’s named like it. I do not stand with values shared with nfts and cryptocurrency. That’s my vision and i completely get it if you do. I think creating a new system built bearly teh same as the old one creates the same problems."
+                "img": "../img/art/buythis.png", 
+                "text": "'This is not a nft' is the symbol of my collection. That’s why it’s named like it. I do not stand with values shared with nfts and cryptocurrency. That’s my vision and i completely get it if you do. I think creating a new system built bearly the same as the old one creates the same problems."
             }, 
             {
                 "id": "2", 
                 "title": "'don't trust our system'",
-                "img": "../art.png",
-                "text": "'This is not a nft' is the symbol of my collection. That’s why it’s named like it. I do not stand with values shared with nfts and cryptocurrency. That’s my vision and i completely get it if you do. I think creating a new system built bearly teh same as the old one creates the same problems."
+                "img": "../img/art/donttrust.png",
+                "text": "'This is not a nft' is the symbol of my collection. That’s why it’s named like it. I do not stand with values shared with nfts and cryptocurrency. That’s my vision and i completely get it if you do. I think creating a new system built bearly the same as the old one creates the same problems."
             }
         ]
     }, 
     "OFFF":  {
         "id": "1", 
         "title": "offf!",
-        "img": "../offf.png", 
+        "img": "../img/offf/offfHome.png", 
         "Articles": [
             {
                 "id": "0", 
                 "title": "festival",
-                "img": "../festival2.png"
+                "img": "../img/offf/offf.png", 
+                "text": "OFFF Barcelona is the largest showcase and window of contemporary visual creativity and design. Join us for a 3-day festival full of workshops, conferences, networking and more. March 23.24.25, 2023"
             }, 
             {
                 "id": "1", 
                 "title": "trip",
-                "img": "../bus.png"
+                "img": "../img/offf/trip.png", 
+                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi"
             }, 
             {
                 "id": "2", 
                 "title": "conferences",
-                "img": "../conferences.png"
+                "img": "../img/offf/conferences.png", 
+                "text": "ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,"
             }, 
             {
                 "id": "3", 
                 "title": "activities",
-                "img": "../casaMila.png"
+                "img": "../img/offf/activities.png", 
+                "text": "ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,"
             }
         ]
     }, 
     "History":  {
         "id": "2", 
         "title": "history",
-        "img": "../history.png", 
+        "img": "../img/history/history.png", 
         "Articles": [
             {
                 "id": "0", 
                 "title": "sketches",
-                "img": "../history.png"
+                "img": "../img/history/history.png", 
+                "text": "As you can see from the image, I conducted paper research for the logo. I then vectorized most of my sketches on Ilustrator to finally choose the final logo on the homepage."
             }, 
             {
                 "id": "1", 
                 "title": "searches",
-                "img": "../search.png"
+                "img": "../img/history/search.png", 
+                "text": "The real meaning of my nfts is the criticism of the system in which they fit themselves.Indeed, I am personally not in phase with the values and means of functioning of the blockchain. I find that the universe of crypto-currencies and nfts is well associated with the abysmal theme full of unknown and dangers."
             }, 
             {
                 "id": "2", 
                 "title": "meanings",
-                "img": "../meanings.png"
+                "img": "../img/history/meanings.png", 
+                "text": "My moodboard on the right represents very well the universe and the imprint that I wanted to retranscribe through my nfts and the site dedicated to them. The very pure style of ultra minimalism combined with vectorial forms made on Illustrator and fonts from the PP Agency foundry brings this cold and mysterious side of the abyss"
             }
         ]
     }

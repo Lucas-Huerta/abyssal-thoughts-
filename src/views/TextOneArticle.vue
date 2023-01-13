@@ -46,7 +46,7 @@ export default{
         <p>
             {{ this.route.params.text }}
         </p>
-        <div class="arrow" @click="this.$router.go(1)">
+        <div class="arrow" @click="this.$router.go(-1)">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.767947 0L0 0.767947L9.23205 10L0 19.2321L0.767947 20L10 10.7679L19.2321 20L20 19.2321L10.7679 10L20 0.767947L19.2321 0L10 9.23205L0.767947 0Z" fill="white"/>
             </svg>
@@ -73,6 +73,8 @@ export default{
     margin: -5vh 0 5vh 0;
     font-family: "PP-Acma";
     font-size: 41px;
+    width: 50vw;
+    text-align: right;
 }
 
 #section_OneArticle p{
