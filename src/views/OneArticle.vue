@@ -7,31 +7,33 @@ export default{
         return{
             route: useRoute(), 
             pageArticle: ref(), 
-            store: null
+            store: ref(), 
+            idArticle: ref()
         }
     },
 
-    mounted(){
-        this.store = this.$pinia.state.value.articles.articles; 
+    async mounted(){
+        this.store = await this.$pinia.state.value.articles.articles; 
         /**
          * for in loop 
          * index => name of the article in loop
          * this.route.params.index => name of article to find (pass in router)
          */
-        for (const index in this.store) {
+        for (let index in this.store) {
             if (index === this.route.params.index) {
-                this.pageArticle = this.store[index].Articles;
+                this.pageArticle = await this.store[index].Articles;
+                this.idArticle = await this.store[index].id; 
             }
         }
     },
 
     methods: {
-        async goArticle(index, title, img, text){
+        async goArticle(title, img, text){
+            let id = await this.idArticle; 
             // TODO pass good parameter to component textOneArticle
             await this.$router.push({
                 name: "OneArticle", 
-                params: {index, title, img, text},
-                state: {Article: index}
+                params: {id, title, img, text}
             })
         }
     }
@@ -47,6 +49,15 @@ export default{
         </svg>
     </div>
 
+    <!-- arrow svg -->
+    <div class="arrow">
+        <RouterLink to="/">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.767947 0L0 0.767947L9.23205 10L0 19.2321L0.767947 20L10 10.7679L19.2321 20L20 19.2321L10.7679 10L20 0.767947L19.2321 0L10 9.23205L0.767947 0Z" fill="white"/>
+            </svg>
+        </RouterLink>
+    </div>
+
     <RouterLink to="/">
       <h1 class="mainTitle">Abyssal thought</h1>
     </RouterLink>
@@ -57,7 +68,7 @@ export default{
         </h2>
     </div>
     <div class="columnArticle">
-        <div v-for="article in this.pageArticle" :key="article" class="row" @click="goArticle(article.id, article.title, article.img, article.text)">
+        <div v-for="article in this.pageArticle" :key="article" class="row" @click="goArticle(article.title, article.img, article.text)">
             <h2>
                 {{ article.title }}
             </h2>
@@ -68,6 +79,15 @@ export default{
 </template>
 
 <style scoped>
+
+.arrow{
+    z-index: 20;
+    position: absolute;
+    top: 50vh; 
+    bottom: 50vh;
+    left: 5vw;
+    width: 10vw;
+}
 
 #titleArticle{
     position: absolute;
@@ -106,7 +126,7 @@ export default{
 .columnArticle .row h2{
     font-family: "PP-Acma";
     font-size: 41px;
-    margin: 0 -25vw 0 0;
+    margin: 0 -20vw 0 0;
     z-index: 10;
     width: 50vw;
     text-align: right;

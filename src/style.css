@@ -73,10 +73,3 @@ button:focus-visible {
   text-align: center;
   height: 100vh;
 }
-
-.arrow{
-  position: absolute;
-  bottom: 5%;
-  left: 0;
-  right: 0;
-}

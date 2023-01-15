@@ -1,5 +1,5 @@
 <script>
-import { createApp, ref } from 'vue';
+import { ref } from 'vue';
 import { useArticleStore } from '../store/store'
 
 export default{

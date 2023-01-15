@@ -1,5 +1,5 @@
 <script>
-import { ref } from 'vue';
+import { ref, toRaw } from 'vue';
 import { useRoute } from 'vue-router'
 
 export default{
@@ -7,45 +7,36 @@ export default{
         return{
             route: useRoute(), 
             pageArticle: ref(), 
-            store: null
+            store: ref(), 
+            mainArticle: ref({})
         }
     },
 
-    mounted(){
+    async mounted(){
         this.store = this.$pinia.state.value.articles.articles; 
         console.log(this.route.params);
         console.log("store", this.store);
-        // for (const index in this.store) {
-        //     console.log(index);
-        //     for (const key in index) {
-        //         if (key === this.route.params.index) {
-        //             console.log("index store", this.store[key]);
-        //             this.pageArticle = this.store[key].index;
-        //         }  
-        //     }
-        // }
-
-        // for (const key in object) {
-        //     if (Object.hasOwnProperty.call(object, key)) {
-        //         const element = object[key];
-                
-        //     }
-        // }
+        console.log("ID", this.route.params.id);
+        // TODO boucle sur le store avec l'id pris en compte pour trouver les images des autres articles et pousser avec leurs paramètres 
     }
-
 }
 
 </script>
 
 <template>
    <div id="section_OneArticle">
-        <img :src="this.route.params.img" alt="image article">
+        <img id="displayImg" :src="this.route.params.img" alt="image article">
         <h2>
             {{ this.route.params.title }}
         </h2>
         <p>
             {{ this.route.params.text }}
         </p>
+        <div v-if="this.route.params.id > 0" class="rowOtherArticles">
+            <img :src="this.route.params.img" alt="image article">
+            <img :src="this.route.params.img" alt="image article">
+            <img :src="this.route.params.img" alt="image article">
+        </div>
         <div class="arrow" @click="this.$router.go(-1)">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.767947 0L0 0.767947L9.23205 10L0 19.2321L0.767947 20L10 10.7679L19.2321 20L20 19.2321L10.7679 10L20 0.767947L19.2321 0L10 9.23205L0.767947 0Z" fill="white"/>
@@ -56,6 +47,13 @@ export default{
 
 <style scoped>
 
+.arrow{
+  position: relative;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+}
+
 #section_OneArticle{
     max-height: 100vh;
     display: flex;
@@ -64,7 +62,7 @@ export default{
     justify-content: space-between;
 }
 
-#section_OneArticle img{
+#displayImg{
     width: 100vw;
     margin: 0;
 }
@@ -83,6 +81,19 @@ export default{
     font-size: 20px;
     line-height: 24px;
     width: 70%;
+}
+
+.rowOtherArticles{
+    margin: 3vh 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.rowOtherArticles img{
+    width: 30vw;
+    height: auto;
 }
 
 
