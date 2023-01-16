@@ -14,12 +14,8 @@ export default{
     async mounted(){
         // Store
         this.store = this.$pinia.state.value.articles.articles; 
-        console.log(this.store);
         // Titre à repasser lorsqu'on clic sur la croix pour revenir à la page article
         this.mainArticle = this.route.params.passTitle; 
-        console.log(this.mainArticle);
-
-        // TODO boucle sur le store avec l'id pris en compte pour trouver les images des autres articles et pousser avec leurs paramètres 
     }, 
 
     methods: {
@@ -31,8 +27,25 @@ export default{
             })
         }, 
 
-        async goOneArticle(){
-            console.log("go");
+        /**
+         * Function witch go on one article with params of the OneArticle route 
+         * @param {*} id id article
+         * @param {*} title title article
+         * @param {*} img img article
+         * @param {*} text text article
+         * @param {*} passTitle title of the parent section (Art / Offf! / History)
+         */
+        async goOneArticle(id, title, img, text, passTitle){
+            this.$router.push({
+                name: "OneArticle", 
+                params: {
+                    id, 
+                    title, 
+                    img, 
+                    text,
+                    passTitle
+                }
+            })
         }
     }
 }
@@ -51,10 +64,12 @@ export default{
         <div v-if="this.route.params.id > 0">
             <div v-for="(article, index) in this.store" :key="index">
                 <div v-if="article.title == this.mainArticle" class="rowOtherArticles">
-                    <img v-for="image in article.Articles" @click="goOneArticle()" :src="image.img" alt="image article">
+                    <!-- Click on image => pass params of image click to goOneArticle function  -->
+                    <img v-for="(image, key) in article.Articles" :key="key" @click="goOneArticle(article.Articles[key].id, article.Articles[key].title, article.Articles[key].img, article.Articles[key].text, this.mainArticle)" :src="image.img" alt="image article">
                 </div>
             </div>
         </div>
+        <!-- :id:title(\\d+)*:img:text:passTitle -->
         <div class="arrow" @click="handleSuccess()">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.767947 0L0 0.767947L9.23205 10L0 19.2321L0.767947 20L10 10.7679L19.2321 20L20 19.2321L10.7679 10L20 0.767947L19.2321 0L10 9.23205L0.767947 0Z" fill="white"/>
