@@ -6,18 +6,34 @@ export default{
     data(){
         return{
             route: useRoute(), 
-            pageArticle: ref(), 
             store: ref(), 
-            mainArticle: ref({})
+            mainArticle: ref()
         }
     },
 
     async mounted(){
+        // Store
         this.store = this.$pinia.state.value.articles.articles; 
-        console.log(this.route.params);
-        console.log("store", this.store);
-        console.log("ID", this.route.params.id);
+        console.log(this.store);
+        // Titre à repasser lorsqu'on clic sur la croix pour revenir à la page article
+        this.mainArticle = this.route.params.passTitle; 
+        console.log(this.mainArticle);
+
         // TODO boucle sur le store avec l'id pris en compte pour trouver les images des autres articles et pousser avec leurs paramètres 
+    }, 
+
+    methods: {
+        async handleSuccess(){
+            let index = this.mainArticle; 
+            await this.$router.push({
+                name: "article", 
+                params: {index}, 
+            })
+        }, 
+
+        async goOneArticle(){
+            console.log("go");
+        }
     }
 }
 
@@ -32,12 +48,14 @@ export default{
         <p>
             {{ this.route.params.text }}
         </p>
-        <div v-if="this.route.params.id > 0" class="rowOtherArticles">
-            <img :src="this.route.params.img" alt="image article">
-            <img :src="this.route.params.img" alt="image article">
-            <img :src="this.route.params.img" alt="image article">
+        <div v-if="this.route.params.id > 0">
+            <div v-for="(article, index) in this.store" :key="index">
+                <div v-if="article.title == this.mainArticle" class="rowOtherArticles">
+                    <img v-for="image in article.Articles" @click="goOneArticle()" :src="image.img" alt="image article">
+                </div>
+            </div>
         </div>
-        <div class="arrow" @click="this.$router.go(-1)">
+        <div class="arrow" @click="handleSuccess()">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.767947 0L0 0.767947L9.23205 10L0 19.2321L0.767947 20L10 10.7679L19.2321 20L20 19.2321L10.7679 10L20 0.767947L19.2321 0L10 9.23205L0.767947 0Z" fill="white"/>
             </svg>
@@ -92,7 +110,7 @@ export default{
 }
 
 .rowOtherArticles img{
-    width: 30vw;
+    width: 30%;
     height: auto;
 }
 

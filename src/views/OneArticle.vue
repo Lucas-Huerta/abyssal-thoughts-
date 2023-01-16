@@ -8,7 +8,8 @@ export default{
             route: useRoute(), 
             pageArticle: ref(), 
             store: ref(), 
-            idArticle: ref()
+            idArticle: ref(), 
+            titleArticle: null
         }
     },
 
@@ -21,19 +22,25 @@ export default{
          */
         for (let index in this.store) {
             if (index === this.route.params.index) {
+                this.titleArticle = await this.store[index].title; 
                 this.pageArticle = await this.store[index].Articles;
                 this.idArticle = await this.store[index].id; 
             }
         }
+
+        // let previousRoute = this.$router.currentRoute.value.params;
+        // console.log("previous", previousRoute); 
+        // console.log("test", this.idArticle);
     },
 
     methods: {
         async goArticle(title, img, text){
             let id = await this.idArticle; 
+            let passTitle = await this.titleArticle; 
             // TODO pass good parameter to component textOneArticle
             await this.$router.push({
                 name: "OneArticle", 
-                params: {id, title, img, text}
+                params: {id, passTitle, title, img, text}, 
             })
         }
     }

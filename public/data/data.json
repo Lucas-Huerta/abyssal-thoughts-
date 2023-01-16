@@ -1,5 +1,5 @@
 {
-    "Art": {
+    "art": {
         "id": "0", 
         "title": "art",
         "img": "../img/art/thisisnotnft.png",
@@ -24,7 +24,7 @@
             }
         ]
     }, 
-    "OFFF":  {
+    "offf!":  {
         "id": "1", 
         "title": "offf!",
         "img": "../img/offf/offfHome.png", 
@@ -55,7 +55,7 @@
             }
         ]
     }, 
-    "History":  {
+    "history":  {
         "id": "2", 
         "title": "history",
         "img": "../img/history/history.png", 
