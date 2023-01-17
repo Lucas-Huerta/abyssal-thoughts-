@@ -1,13 +1,17 @@
 <script>
-import { ref, toRaw } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router'
+import anime from 'animejs';
 
 export default{
     data(){
         return{
             route: useRoute(), 
             store: ref(), 
-            mainArticle: ref()
+            mainArticle: ref(), 
+            img: null, 
+            useImg: null, 
+            test: null
         }
     },
 
@@ -18,13 +22,55 @@ export default{
         this.mainArticle = this.route.params.passTitle; 
     }, 
 
+    async updated(){
+
+        this.test = document.getElementsByClassName("none");
+        console.log(this.test);
+
+        await console.log(this.$refs.rowImages);
+        for (this.img in this.$refs.rowImages) {
+            // await console.log("for", this.img);
+            if(this.img == this.route.params.id){
+                // console.log("good", this.img);
+                this.useImg = await document.getElementById(this.img); 
+                // console.log(this.useImg);
+                await this.useImg.classList.toggle("none"); 
+            }
+        }
+    }, 
+
     methods: {
         async handleSuccess(){
             let index = this.mainArticle; 
-            await this.$router.push({
-                name: "article", 
-                params: {index}, 
-            })
+
+            // anim title
+            anime({
+                targets: this.$refs.mainTextArticle, 
+                opacity: 0, 
+                easing: 'easeInOutQuad',
+                duration: 500,
+                complete: () => {
+                    this.$router.push({
+                        name: "article", 
+                        params: {index}, 
+                    })
+                }
+            }); 
+
+            // anim main image
+            anime({
+                targets: this.$refs.mainImageArticle, 
+                translateX: 100, 
+                translateY: 200, 
+                easing: 'easeInOutQuad',
+                duration: 500,
+                complete: () => {
+                    this.$router.push({
+                        name: "article", 
+                        params: {index}, 
+                    })
+                }
+            }); 
         }, 
 
         /**
@@ -36,16 +82,25 @@ export default{
          * @param {*} passTitle title of the parent section (Art / Offf! / History)
          */
         async goOneArticle(id, title, img, text, passTitle){
-            this.$router.push({
-                name: "OneArticle", 
-                params: {
-                    id, 
-                    title, 
-                    img, 
-                    text,
-                    passTitle
+            anime({
+                targets: img, 
+                translateY: -200, 
+                easing: 'easeInOutQuad',
+                duration: 500,
+                complete: () => {
+                    this.$router.push({
+                        name: "OneArticle", 
+                        params: {
+                            id, 
+                            title, 
+                            img, 
+                            text,
+                            passTitle
+                        }
+                    })
                 }
-            })
+            }); 
+            
         }
     }
 }
@@ -54,18 +109,18 @@ export default{
 
 <template>
    <div id="section_OneArticle">
-        <img id="displayImg" :src="this.route.params.img" alt="image article">
-        <h2>
+        <img id="displayImg" :src="this.route.params.img" alt="image article" ref="mainImageArticle">
+        <h2 ref="mainTextArticle">
             {{ this.route.params.title }}
         </h2>
-        <p>
+        <p ref="mainTextArticle">
             {{ this.route.params.text }}
         </p>
         <div v-if="this.route.params.id > 0">
             <div v-for="(article, index) in this.store" :key="index">
                 <div v-if="article.title == this.mainArticle" class="rowOtherArticles">
                     <!-- Click on image => pass params of image click to goOneArticle function  -->
-                    <img v-for="(image, key) in article.Articles" :key="key" @click="goOneArticle(article.Articles[key].id, article.Articles[key].title, article.Articles[key].img, article.Articles[key].text, this.mainArticle)" :src="image.img" alt="image article">
+                    <img v-for="(image, key) in article.Articles" :key="key" :id="key" @click="goOneArticle(article.Articles[key].id, article.Articles[key].title, article.Articles[key].img, article.Articles[key].text, this.mainArticle)" :src="image.img" alt="image article" ref="rowImages"/>
                 </div>
             </div>
         </div>
@@ -120,8 +175,9 @@ export default{
     margin: 3vh 0;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .rowOtherArticles img{
@@ -129,5 +185,8 @@ export default{
     height: auto;
 }
 
+.none{
+    display: none;
+}
 
 </style>
