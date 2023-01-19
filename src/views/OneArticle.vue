@@ -155,8 +155,6 @@ export default{
             </div>
         </div>
     </div>
-    
-   
 </template>
 
 <style scoped>
@@ -263,6 +261,7 @@ export default{
     .history .columnArticle .row h2{
         padding: 10vh 0 0 0;
         width: 10vw;
+        text-align: left;
     }
 
     /* Image les unes sur les autres  */
@@ -280,15 +279,10 @@ export default{
        justify-content: center;
     }
 
-    .offf .columnArticle .row:nth-of-type(2), 
-    .history .columnArticle .row:nth-of-type(2){
-        flex-direction: row-reverse;
-    }
-
     .offf .columnArticle .row img, 
     .history .columnArticle .row img{
        width: 60vw;
-       margin: 0 0 -80vh 0;
+       margin: 0 0 -105vh 0;
     }
 
     .offf .columnArticle .row img:nth-of-type(1), 
@@ -331,13 +325,14 @@ export default{
     }
 
     .columnArticle .row:nth-of-type(2){
-        flex-direction: row;
-        align-items: flex-end;
+        justify-content: flex-start;
+        flex-direction: row-reverse;
+        align-items: center;
     }
 
     .columnArticle .row:nth-of-type(3){
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .columnArticle .row img{
