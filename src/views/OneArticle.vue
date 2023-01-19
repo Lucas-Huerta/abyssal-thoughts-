@@ -145,12 +145,13 @@ export default{
                 {{ this.route.params.index }}
             </h2>
         </div>
-        <div class="columnArticle">
+        <div class="columnArticle" ref="addClassDesktop">
             <div v-for="article in this.pageArticle" :key="article" class="row" @click="goArticle(article.id, article.title, article.img, article.text)">
                 <h2 ref="titleArticle">
                     {{ article.title }}
                 </h2>
                 <img :src="article.img" alt="image article" ref="imageArticle" />
+                <span class="buttonDesktop">Buy</span>
             </div>
         </div>
     </div>
@@ -238,4 +239,130 @@ export default{
   height: 70%;
 }
 
+.buttonDesktop{
+    display: none;
+}
+
+@media screen and (min-width: 500px) {
+
+    .black .columnArticle .row h2{
+        display: none;
+    }
+
+    .offf .buttonDesktop, 
+    .history .buttonDesktop{
+        display: none;
+    }
+
+    .offf .columnArticle, 
+    .history .columnArticle{
+       min-height: 0;
+    }
+
+    .offf .columnArticle .row h2, 
+    .history .columnArticle .row h2{
+        padding: 10vh 0 0 0;
+        width: 10vw;
+    }
+
+    /* Image les unes sur les autres  */
+
+    .offf .columnArticle, 
+    .history .columnArticle{
+       flex-direction: column;
+       align-items: flex-start;
+    }
+
+    .offf .columnArticle .row, 
+    .history .columnArticle .row{
+       flex-direction: row-reverse;
+       align-items: center;
+       justify-content: center;
+    }
+
+    .offf .columnArticle .row:nth-of-type(2), 
+    .history .columnArticle .row:nth-of-type(2){
+        flex-direction: row-reverse;
+    }
+
+    .offf .columnArticle .row img, 
+    .history .columnArticle .row img{
+       width: 60vw;
+       margin: 0 0 -80vh 0;
+    }
+
+    .offf .columnArticle .row img:nth-of-type(1), 
+    .history .columnArticle .row img:nth-of-type(1){
+       z-index: 7;
+    }
+    .offf .columnArticle .row img:nth-of-type(2), 
+    .history .columnArticle .row img:nth-of-type(2){
+        z-index: 8;
+    }
+    .offf .columnArticle .row img:nth-of-type(3), 
+    .history .columnArticle .row img:nth-of-type(3){
+        z-index: 9;
+    }
+    .offf .columnArticle .row img:nth-of-type(4), 
+    .history .columnArticle .row img:nth-of-type(4){
+        z-index: 10;
+    }
+
+    #titleArticle{
+        top: 10%;
+        left: 50%;
+        right: 40%;
+        font-size: 30px;
+    }
+
+    #titleArticle h2{
+        margin: 0;
+    }
+
+    .columnArticle{
+        flex-direction: row;
+        width: 100vw;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .columnArticle .row{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .columnArticle .row:nth-of-type(2){
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .columnArticle .row:nth-of-type(3){
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .columnArticle .row img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .buttonDesktop{
+        font-family: "PP-Acma";
+        font-size: 20px;
+        display: flex;
+        padding: 1vh 2vw;
+        border: 2px white solid;
+        background-color: rgba(255, 255, 255, 0.40);
+        color: black;
+        opacity: 0.40;
+        margin: 2vh 2vw;
+    }
+
+    .buttonDesktop:hover{
+        cursor: pointer;
+    }
+
+    .arrow{
+        display: none;
+    }
+}
 </style>

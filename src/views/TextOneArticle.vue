@@ -110,12 +110,15 @@ export default{
 <template>
    <div id="section_OneArticle">
         <img id="displayImg" :src="this.route.params.img" alt="image article" ref="mainImageArticle">
-        <h2 ref="mainTextArticle">
-            {{ this.route.params.title }}
-        </h2>
-        <p ref="mainTextArticle">
-            {{ this.route.params.text }}
-        </p>
+        <div>
+            <h2 ref="mainTextArticle">
+                {{ this.route.params.title }}
+            </h2>
+            <p ref="mainTextArticle">
+                {{ this.route.params.text }}
+            </p>
+        </div>
+        
         <div v-if="this.route.params.id > 0">
             <div v-for="(article, index) in this.store" :key="index">
                 <div v-if="article.title == this.mainArticle" class="rowOtherArticles">
@@ -150,6 +153,10 @@ export default{
     justify-content: space-between;
 }
 
+#section_OneArticle div{
+    margin: 1vh auto 0 auto;
+}
+
 #displayImg{
     width: 100vw;
     margin: 0;
@@ -169,6 +176,8 @@ export default{
     font-size: 20px;
     line-height: 24px;
     width: 70%;
+    text-align: left;
+    margin: 0 auto 5vh auto;
 }
 
 .rowOtherArticles{
@@ -187,6 +196,51 @@ export default{
 
 .none{
     display: none;
+}
+
+@media screen and (min-width: 500px) {
+    #section_OneArticle{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #section_OneArticle div:first-of-type{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+    }
+
+    #section_OneArticle h2{
+        margin: 0;
+        font-size: 66px;
+        text-align: left;
+    }
+
+    #section_OneArticle p{
+        font-size: 32px;
+        line-height: 33px;
+        margin: 0;
+        width: 100%;
+    }
+
+    .rowOtherArticles img{
+        display: none;
+    }
+
+    #displayImg{
+        width: 40%;
+    }
+
+    .arrow{
+        position: absolute;
+        top: 50%;
+        bottom: 50%;
+        left: 90%;
+    }
 }
 
 </style>

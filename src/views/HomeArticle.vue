@@ -131,4 +131,42 @@ export default{
     right: 0;
     bottom: 0;
 }
+
+@media screen and (min-width: 500px) {
+    .columArticle{
+        flex-direction: row;
+    }
+    .rowArticle{
+        flex-direction: column;
+        height: 90vh;
+    }
+
+    .rowArticle h2{
+       margin: 5vh 5vw;
+       padding: 1vw 1vh;
+       border: 2px white solid;
+       background-color: rgba(255, 255, 255, 0.40);
+       color: black;
+       opacity: 0.40;
+    }
+
+    .rowArticle h2:hover, .rowArticle img:hover{
+        cursor: pointer;
+    }
+
+    .rowArticle:nth-child(2){
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: end;
+    }
+
+    .rowArticle:nth-child(3){
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+}
+
 </style>
